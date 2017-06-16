@@ -23,5 +23,11 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['-id']
+
     def __str__(self):
         return self.message
+
+    def get_edit_url(self):
+        return reverse('blog:comment_edit', args=[self.post.pk, self.pk])
